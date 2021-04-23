@@ -1,0 +1,27 @@
+CAPI=2:
+
+name : ::user_project_wrapper:1.0.0
+
+filesets:
+    rtl:
+        files:
+            - src/rtl/defines.v
+            - src/rtl/user_project_wrapper.v
+            - src/blackbox/defines.v : {file_type : verilogBlackbox}
+            - src/blackbox/user_proj_example.v : {file_type : verilogBlackbox}
+            - src/LEF/user_proj_example.lef : {file_type : LEF}
+            - src/GDS/user_proj_example.gds : {file_type : GDS}
+        file_type : verilogSource
+    
+    config:
+        files:
+            - src/params.tcl : {file_type : tclSource}
+            - src/pin_order.cfg : {file_type : pinOrder}
+            - src/user_project_wrapper_empty.def : {file_type : fpDefTemplate}
+            - src/macro.cfg : {file_type : macroPlacement}
+
+targets:
+    build:
+        default_tool : openlane
+        filesets : [rtl, config]
+        toplevel : user_project_wrapper
