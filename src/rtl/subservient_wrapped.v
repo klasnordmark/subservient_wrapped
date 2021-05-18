@@ -1,13 +1,9 @@
+`default_nettype none
+
 module subservient_wrapped (
                             `ifdef USE_POWER_PINS 
-                            //inout vdda1,
-                            //inout vdda2,
-                            //inout vssa1,
-                            //inout vssa2,
                             inout vccd1,
-                            //inout vccd2,
                             inout vssd1,
-                            //inout vssd2,
                             `endif 
                             input	 wb_clk_i,
                             input 	 wb_rst_i,
@@ -19,6 +15,7 @@ module subservient_wrapped (
                             input [31:0] wbs_adr_i,
                             output 		 wbs_ack_o,
                             output [31:0] wbs_dat_o,
+			    input la_data_in,
                             output io_out,
                             output io_oeb,
                             output [2:0] irq);
@@ -78,3 +75,5 @@ module subservient_wrapped (
     );
     
 endmodule
+
+`default_nettype wire

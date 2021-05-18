@@ -1,3 +1,5 @@
+`default_nettype none
+
 module ff_ram #(parameter aw = 10,
                 parameter memsize = 1024)
               (input wire reset,
@@ -77,3 +79,5 @@ module ff_ram #(parameter aw = 10,
     end
     
 endmodule
+
+`default_nettype wire
