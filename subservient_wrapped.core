@@ -1,0 +1,25 @@
+CAPI=2:
+
+name : ::subservient_wrapped:1.0.0
+
+filesets:
+    source:
+        files:
+            - src/rtl/ff_ram.v
+            - src/rtl/subservient_wrapped.v
+        file_type : verilogSource
+        depend : [subservient]
+    
+    config:
+        files:
+            - src/params.tcl : {file_type : tclSource}
+            - src/pin_order.cfg : {file_type : user, copyto : .}
+
+targets:
+    default:
+        filesets : [source]
+
+    sky130:
+        default_tool : openlane
+        filesets : [source, config]
+        toplevel : subservient_wrapped
