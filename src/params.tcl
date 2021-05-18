@@ -1,4 +1,4 @@
-#set script_dir [file dirname [file normalize [info script]]]
+set script_dir [file dirname [file normalize [info script]]]
 
 set ::env(CLOCK_PERIOD) "20"
 set ::env(CLOCK_PORT) "wb_clk_i"
@@ -12,4 +12,4 @@ set ::env(GND_NETS) [list {vssd1}]
 #set ::env(VDD_NETS) [list {vccd1} {vccd2} {vdda1} {vdda2}]
 #set ::env(GND_NETS) [list {vssd1} {vssd2} {vssa1} {vssa2}]
 
-#set ::env(FP_PIN_ORDER_CFG) $script_dir/pin_order.cfg
+set ::env(FP_PIN_ORDER_CFG) $script_dir/pin_order.cfg
