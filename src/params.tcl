@@ -9,7 +9,5 @@ set ::env(DIODE_INSERTION_STRATEGY) "2"
 
 set ::env(VDD_NETS) [list {vccd1}]
 set ::env(GND_NETS) [list {vssd1}]
-#set ::env(VDD_NETS) [list {vccd1} {vccd2} {vdda1} {vdda2}]
-#set ::env(GND_NETS) [list {vssd1} {vssd2} {vssa1} {vssa2}]
 
 set ::env(FP_PIN_ORDER_CFG) $script_dir/pin_order.cfg

@@ -15,7 +15,7 @@ module subservient_wrapped (
                             input [31:0] wbs_adr_i,
                             output 		 wbs_ack_o,
                             output [31:0] wbs_dat_o,
-			    input la_data_in,
+			                input la_data_in,
                             output io_out,
                             output io_oeb,
                             output [2:0] irq);
