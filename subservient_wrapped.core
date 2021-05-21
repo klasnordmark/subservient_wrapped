@@ -10,6 +10,12 @@ filesets:
         file_type : verilogSource
         depend : [subservient]
 
+    gl:
+        files:
+            - src/gl/subservient_wrapped.v
+            - src/gl/defines.v
+        file_type : verilogSource
+
     tb:
         files:
             - src/tb/uart_decoder.v
@@ -56,6 +62,16 @@ targets:
     sim_blinky:
         <<: *sim
         parameters:
+            - firmware=blinky.hex
+            - memsize=512
+
+    sim_blinky_gl:
+        <<: *sim
+        filesets : [mem_files, gl, tb]
+        tools:
+            icarus:
+                iverilog_options : [-I $(PDK_ROOT)/sky130A/]
+        parameters :
             - firmware=blinky.hex
             - memsize=512
 

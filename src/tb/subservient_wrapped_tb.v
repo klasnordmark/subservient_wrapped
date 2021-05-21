@@ -6,6 +6,11 @@
  */
 
 `default_nettype none
+
+`include "/home/klasn/git/openlane-master/pdks/sky130A/libs.ref/sky130_fd_sc_hd/verilog/primitives.v"
+`include "/home/klasn/git/openlane-master/pdks/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v"
+`include "/home/klasn/git/openlane-master/pdks/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_ef_sc_hd__fakediode_2.v"
+
 module subservient_wrapper_tb; 
     parameter memfile = ""; 
     parameter memsize = 512; 
@@ -15,6 +20,9 @@ module subservient_wrapper_tb;
     reg clk = 1'b0;
     reg rst = 1'b1;
     
+    wire PWR = 1'b1;
+    wire GND = 1'b0;
+
     //Debug interface
     reg 		 la_data_in;
     reg [31:0] 	 wbs_adr_i;
@@ -104,7 +112,12 @@ module subservient_wrapper_tb;
     uart_decoder uart_decoder (baudrate, io_out);
             
     subservient_wrapped dut
-    (// Clock & reset
+    (
+    `ifdef USE_POWER_PINS
+    .vccd1(PWR),
+    .vssd1(GND),
+    `endif    
+    // Clock & reset
     .wb_clk_i (clk),
     .wb_rst_i (rst),
             

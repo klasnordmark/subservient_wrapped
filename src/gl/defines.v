@@ -1,0 +1,3 @@
+`define USE_POWER_PINS
+`define FUNCTIONAL
+`define UNIT_DELAY #1
