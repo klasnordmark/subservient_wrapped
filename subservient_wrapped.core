@@ -9,11 +9,24 @@ filesets:
             - src/rtl/subservient_wrapped.v
         file_type : verilogSource
         depend : [subservient]
+
+    tb:
+        files:
+            - src/tb/uart_decoder.v
+            - src/tb/subservient_wrapped_tb.v
+        file_type : verilogSource
+        depend : [vlog_tb_utils]
     
     config:
         files:
             - src/params.tcl : {file_type : tclSource}
             - src/pin_order.cfg : {file_type : user, copyto : .}
+
+    mem_files:
+        files:
+            - src/sw/blinky.hex : {copyto : blinky.hex}
+            - src/sw/hello.hex  : {copyto : hello.hex}
+        file_type : user
 
 targets:
     default:
@@ -23,3 +36,42 @@ targets:
         default_tool : openlane
         filesets : [source, config]
         toplevel : subservient_wrapped
+
+    sim: &sim
+        default_tool: icarus
+        filesets : [mem_files, source, tb]
+        parameters :
+            - firmware
+            - memsize
+            - uart_baudrate
+        toplevel : subservient_wrapper_tb
+
+    sim_hello:
+        <<: *sim
+        parameters :
+            - firmware=hello.hex
+            - memsize=512
+            - uart_baudrate=115200
+
+    sim_blinky:
+        <<: *sim
+        parameters:
+            - firmware=blinky.hex
+            - memsize=512
+
+parameters:
+    firmware:
+        datatype : file
+        description : Preload RAM with a hex file at runtime
+        paramtype : plusarg
+
+    memsize:
+        datatype    : int
+        default     : 512
+        description : Memory size in bytes for RAM (default 512B)
+        paramtype   : vlogparam
+
+    uart_baudrate:
+        datatype : int
+        description : Treat gpio output as an UART with the specified baudrate (0 or omitted parameter disables UART decoding)
+        paramtype : plusarg
