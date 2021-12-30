@@ -7,9 +7,9 @@
 
 `default_nettype none
 
-`include "/home/klasn/git/openlane-master/pdks/sky130A/libs.ref/sky130_fd_sc_hd/verilog/primitives.v"
-`include "/home/klasn/git/openlane-master/pdks/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v"
-`include "/home/klasn/git/openlane-master/pdks/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_ef_sc_hd__fakediode_2.v"
+`include "/home/klasn/mpw4/OpenLane/pdks/sky130A/libs.ref/sky130_fd_sc_hd/verilog/primitives.v"
+`include "/home/klasn/mpw4/OpenLane/pdks/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v"
+//`include "/home/klasn/mpw4/OpenLane/pdks/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_ef_sc_hd__fakediode_2.v"
 
 module subservient_wrapper_tb; 
     parameter memfile = ""; 

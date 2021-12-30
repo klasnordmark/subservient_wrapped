@@ -34,15 +34,13 @@ module subservient_wrapped (
     assign irq    = 3'b000;
     
     ff_ram #(.memsize(memsize), .aw(aw)) sram (
-    .reset(wb_rst_i),
-    .clk0(wb_clk_i),
-    .clk1(wb_clk_i),
-    .csb0(!sram_wen),
-    .addr0(sram_waddr),
-    .din0(sram_wdata),
-    .csb1(!sram_ren),
-    .addr1(sram_raddr),
-    .dout1(sram_rdata)
+    .reset (wb_rst_i),
+    .clk   (wb_clk_i),
+    .wen   (sram_wen),
+    .waddr (sram_waddr),
+    .din   (sram_wdata),
+    .raddr (sram_raddr),
+    .dout  (sram_rdata)
     );
     
     subservient #(.memsize(memsize), .aw(aw)) subservient_inst
