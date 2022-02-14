@@ -5,10 +5,11 @@ name : ::subservient_wrapped:1.0.0
 filesets:
     source:
         files:
-            - src/rtl/ff_ram.v
+#            - src/rtl/ff_ram.v
+            - src/rtl/sram_width_converter.v
             - src/rtl/subservient_wrapped.v
         file_type : verilogSource
-        depend : [subservient]
+        depend : [subservient, efabless:sky130_sram:1kbyte_1rw_32x256_8]
 
     gl:
         files:
@@ -34,9 +35,17 @@ filesets:
             - src/sw/hello.hex  : {copyto : hello.hex}
         file_type : user
 
+    openram_if:
+      files: [src/rtl/subservient_openram_if.v : {file_type : verilogSource}]
+
 targets:
     default:
         filesets : [source]
+
+    openram_if:
+        default_tool : openlane
+        filesets : [source, openram_if, config]
+        toplevel : subservient_wrapped
 
     sky130:
         default_tool : openlane
